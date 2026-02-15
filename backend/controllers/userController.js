@@ -1,4 +1,9 @@
-export const test=(req,res)=>{
-    console.log("test is working");
-     res.send("test is working");
-}
+export const update=(req,res,next)=>{};
+
+export const Delete=(req,res,next)=>{};
+
+export const getUser=(req,res,next)=>{};
+
+export const likeVideo=(req,res,next)=>{};
+
+export const dislikeVideo=(req,res,next)=>{};

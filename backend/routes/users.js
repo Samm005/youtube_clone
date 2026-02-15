@@ -1,6 +1,21 @@
 import express from "express";
-import { } from "../controllers/userController.js";
+import { update,Delete,likeVideo,dislikeVideo,getUser } from "../controllers/userController.js";
 
 const router = express.Router();
+
+//Update a user
+router.put("/:id",update);
+
+//Delete a user
+router.delete("/:id",Delete);
+
+//Get a user
+router.get("/find/:id",getUser);
+
+//Like a video
+router.put("/like/:videoId",  likeVideo);
+
+//Dislike a video
+router.put("/dislike/:videoId",  dislikeVideo);
 
 export default router;
