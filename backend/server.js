@@ -6,6 +6,7 @@ import commentRoutes from "./routes/commentRoutes.js";
 import channelRoutes from "./routes/channelRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import authRoutes from "./routes/auth.js";
+import { errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/channels", channelRoutes);
 app.use("/api/videos", videoRoutes);
+
+app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}!!`);
