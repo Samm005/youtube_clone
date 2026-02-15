@@ -7,6 +7,7 @@ import channelRoutes from "./routes/channelRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import authRoutes from "./routes/auth.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const app = express();
 
 connect();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
