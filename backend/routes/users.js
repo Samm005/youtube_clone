@@ -8,15 +8,15 @@ const router = express.Router();
 router.put("/:id",verifyToken,update);
 
 //Delete a user
-router.delete("/:id",Delete);
+router.delete("/:id",verifyToken,Delete);
 
 //Get a user
 router.get("/find/:id",getUser);
 
 //Like a video
-router.put("/like/:videoId",  likeVideo);
+router.put("/like/:videoId",verifyToken,likeVideo);
 
 //Dislike a video
-router.put("/dislike/:videoId",  dislikeVideo);
+router.put("/dislike/:videoId",verifyToken,dislikeVideo);
 
 export default router;
