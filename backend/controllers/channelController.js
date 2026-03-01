@@ -1,4 +1,4 @@
-import Channel from "../models/Channel";
+import Channel from "../models/Channel.js";
 
 export const Suscribe=async (req,res,next)=>{
     try{
