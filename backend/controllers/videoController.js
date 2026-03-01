@@ -1,4 +1,5 @@
 import Video from "../models/Video.js";
+import Channel from "../models/Channel.js";
 
 export const addVideo=async (req,res,next)=>{
     const newVideo = new Video({userId:req.user.id,...req.body});
@@ -51,4 +52,54 @@ export const getVideo=async (req,res,next)=>{
     }catch(err){
         next(err);
     }
+};
+
+export const addView=async (req,res,next)=>{
+     try{
+       await Video.findByIdAndUpdate(req.params.id,{
+            $inc:{views:1}
+        });
+        res.status(200).json("Video view has been increased!");
+    }catch(err){
+        next(err);
+    }
+};
+
+export const random=async (req,res,next)=>{
+     try{
+        const video = await Video.aggregate([{$sample:{size:35}}]);
+        res.status(200).json(video);
+    }catch(err){
+        next(err);
+    }
+};
+
+export const trend=async (req,res,next)=>{
+     try{
+        const videos = await Video.find().sort({views:-1});
+        res.status(200).json(videos);
+    }catch(err){
+        next(err);
+    }
+};
+
+export const sub = async (req, res, next) => {
+  try {
+    const channels = await Channel.find({
+      subscribedUsers: req.user.id
+    });
+
+    const ownerIds = channels.map(channel =>
+      channel.owner.toString()
+    );
+
+    const videos = await Video.find({
+      userId: { $in: ownerIds }
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(videos);
+
+  } catch (err) {
+    next(err);
+  }
 };
